@@ -30,6 +30,10 @@ function ="""
 		function getTime(){
 			return new Date().getTime();
 		}
+		function getRealDate(timestamp){
+			var d = new Date((timestamp/10000000 - 62135596800) * 1000)
+			return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() ;
+		}
 		"""
 
 
@@ -47,17 +51,27 @@ def login( uid, pwd ):
 	res = session.post('http://bus.kuas.edu.tw/API/Users/login', data=data)
 	print res.content
 
-def query(y, m, d):
+def query(y, m, d, operation="全部"):
 	data = {
 		'data':'{"y": \'%s\',"m": \'%s\',"d": \'%s\'}' % ( y, m, d),
-		'operation':'全部',
+		'operation': operation,
 		'page':1,
 		'start':0,
 		'limit':14
 	}
 	res = session.post('http://bus.kuas.edu.tw/API/Frequencys/getAll', data=data)
 	resource = json.loads(res.content)
-	return resource['data']
+	returnData = []
+	for i in resource['data']:
+		Data = {}
+		Data['EndEnrollDateTime'] = js.call('getRealDate', i['EndEnrollDateTime'])
+		Data['runDateTime'] = js.call('getRealDate', i['runDateTime'])
+		Data['endStation'] = i['endStation']
+		Data['busId'] = i['busId']
+		returnData.append(Data)
+
+	return returnData
+
 
 def reserve():
 	data = {
@@ -67,7 +81,16 @@ def reserve():
 	}
 	res = session.post('http://bus.kuas.edu.tw/API/Reserves/getOwn?_dc=' + str(js.call('getTime')), data=data)
 	resource = json.loads(res.content)
-	return resource['data']
+	rd = []
+	for i in resource['data']:
+		data = {}
+		data['time'] = js.call('getRealDate', i['time'])
+		data['endTime'] = js.call('getRealDate', i['endTime'])
+		data['key'] = i['key']
+		data['end'] = i['end']
+		rd.append(data)
+
+	return rd
 		
 def book(kid, action=None):
 	if action == None :
