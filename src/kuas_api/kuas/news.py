@@ -20,20 +20,40 @@ def random_by_weight(p):
 def random_news():
     news_list = [
         {
-            "news_title": "文創CCI發報團隊 ─ 句句到味",
-            "news_image": "http://i.imgur.com/IoVDFVA.jpg",
-            "news_url": "https://www.facebook.com/whataboutcci",
+            "news_title": "iRunner高應大路跑",
+            "news_image": "http://i.imgur.com/Wdwa1W0.jpg",
+            "news_url": "https://www.facebook.com/KUASiRunner",
             "news_content": "",
             "news_weight": 0
         },
         {
-            "news_title": "單車壯遊 彩繪公益",
-            "news_image": "http://i.imgur.com/gU4H4ua.jpg",
-            "news_url": "https://www.facebook.com/kuastma.cycling",
+            "news_title": "104級排球社期初社員大會",
+            "news_image": "http://i.imgur.com/Kjl1iZe.jpg",
+            "news_url": "https://www.facebook.com/events/970003029729702/970003066396365/",
+            "news_content": "",
+            "news_weight": 0
+        },
+        {
+            "news_title": "學生會實習幹部甄選 同雁翱翔",
+            "news_image": "http://i.imgur.com/G2hbmrL.jpg",
+            "news_url": "https://docs.google.com/forms/d/1Q45XyafbKGSavFUn_R_uQpV918V5uanqw7ggOmp7p2c/viewform?c=0&w=1",
             "news_content": "",
             "news_weight": 5
-
-        }
+        },
+        {
+            "news_title": "第八屆志工營-王者之劍",
+            "news_image": "http://i.imgur.com/Bp6JFCh.jpg",
+            "news_url": "https://www.facebook.com/KUAS.Soc",
+            "news_content": "",
+            "news_weight": 5
+        },
+        {
+            "news_title": "韻箏社  期初社員大會",
+            "news_image": "http://i.imgur.com/6OblQiR.jpg",
+            "news_url": "https://www.facebook.com/kuaszither",
+            "news_content": "",
+            "news_weight": 5
+        },
     ]
 
     if NEWS_DEBUG:
