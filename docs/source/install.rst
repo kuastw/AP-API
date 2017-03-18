@@ -30,7 +30,7 @@ activate it::
 
 You can deactivate virtual environment with::
    
-    (.env)$ deactive
+    (.env)$ deactivate
 
 Now you are using a virtual environment with Python 3.
 We must change to branch v2 and install requirements module::
