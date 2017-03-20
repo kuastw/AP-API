@@ -9,7 +9,7 @@ How to use?
 ---
 ```
 $ git clone https://github.com/JohnSounder/AP-API
-$ pip install -r requirement.txt
+$ pip install -r requirements.txt
 $ cd AP-API
 $ python src/web-server.py
 ```
