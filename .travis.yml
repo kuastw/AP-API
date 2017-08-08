@@ -1,14 +1,14 @@
 language: python
 python:
-- '3.4'
-- '3.6'
+    - '3.4'
+    - '3.6'
 install:
-- |
-  python -m venv venv
-  ./venv/bin/python -m pip install -r requirements.txt
-  cd src
+    - |
+      python -m venv venv
+      ./venv/bin/python -m pip install -r requirements.txt
+      cd src
 script:
-- "../venv/bin/python -m unittest discover test"
+    - "../venv/bin/python -m unittest discover test"
 env:
   matrix:
   - secure: PCmX2tzv9ClYOsXa33WpiPBz1hK9PH5dyoneg3Tk4wEPEkstHddZYtaBiMRlb2IwibmHAt7puHycjRmT3W62vOKm7556TymEHmlZPomFFrQr46A/umMrUtjYfeEPUp08jwbysldRq2Xf/sI3p5s42CbulICFQFA4jgSRcu3OYink66jYqu+nsFI48E1zVc69Rhhb5vcFlFfeDvwgALpherMi8XwSOjf8ltXWM7lUuGz1WFuS+/RprDy3lzcBN+bXvuyFqpwqcSoooWjEXE5wvNN9hnhtUhwc5Dx0397X7H/Fzv2ynKDHkOEDk8Fg5kabeFHeTkELO7DWUl2AyJY9WtcwIUkWOwzZXHL6t90EvOG5yHSOoz6fFMGQAE4lokkECJ6Mts9F+hvkEhU7ashp7lWxZWacKaF3NC8bS/PbKuqxw5DQrRxiyx1HM7825ISX1WUYaf6j7oPaQ3lbo0LbgdDUPencmk8dGWmFt2OBOLtXnNxSf48am4uLUp6OYEIYjsangnhn7p+NMoIa1j4BYewbu3sTeVyXk4oEUI7emVUw4Ko5iLC5dT5ueBl5+Rcxk8kAa+dDU7oSWWdS33lSOeJ+DlGl/LPzKV0ywCE6R6+5JNH4eYLN1rbb8X3mts6F7Y5bYfgrLpooxz8G3C4aqg+xUHBuc8gsXf89rASDUzk=
