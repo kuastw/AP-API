@@ -1,13 +1,15 @@
 language: python
 python:
-    - "3.4"
-    - "3.6"
-
+- '3.4'
+- '3.6'
 install:
-    - |
-        python -m venv venv
-        ./venv/bin/python -m pip install -r requirements.txt
-        cd src
-
+- |
+  python -m venv venv
+  ./venv/bin/python -m pip install -r requirements.txt
+  cd src
 script:
-    - ../venv/bin/python -m unittest discover test
+- "../venv/bin/python -m unittest discover test"
+env:
+  matrix:
+  - secure: cQh7V4/QINOybLDD0QI3rLDBk3IcaC/RHkdEaE9yhKl0wEmlQikMxJGvYIcPljF+SoXq2OqwcwGvcKgBVN0qL3mMIWBjBnGgsAdlKshR/WLwDbODjAU7t9ARPTWqWzTV+jT99kaBwdsZ73vCgXwJ3CRd2Q/+VmJofNcSFLXeKoCtZ6tUmesUcClYpGR6R1sHoN9C9P/tM7FsMCtGYxa+BEvQIpH9kIhLPwJOKhFZo/sz21A687l5zFuGALkZbS1tKV+Hti1SloK+2VdF0MQllkR1NrJR6J4XYtJ9nyvmlJxDyJDqzroLQbwo3p5HUfDVGDWZxJOOnmBGWgVVQZvrzMd28L5BS7z/cSGjvhaVo1y//WMBxznEPfv4q62hgk+J3d9juKAqgv95j1Sgvgq5oKH0BJJf2js6zjyYw1EZ9MJSEw+bGH2G7bnubvk1z6n+z0l/WHvcuGi3ZEUzWQxS8okFfnGBZbWax8POQafMozBheHcLEDJx77YMljXpwIFRR6DHVMC2EtZjQeM/TKUHyjeGOjcYktwXzkTMB1/bs7WNhC3JwcfhzXZ109eHBKERrw8Rrzp39OY4mD4o2CbChaHvBvzcKC7XpuRCrHCyG/Xbx1dLWEcrZ3K4QLBH5bku5pVaH5wUAzYUy6F8zPD/1wfYYUrKhcebN6zuFBF2pT8=
+  - secure: Aa5mmc1H+tRmvRyco2/RvgZpa19n48zR8nbyi6YWEHPgHoLouZh4zlZGA5wZk9aLOwwF9pOZHDXn3My0kOuRw4NgbpNRi7MWbdfK7YEeMGe4QXJ4XrbSIysIBBl+1VRQLnbBgT0h7wzdiODemIug5cYX5+6khNWDkAWDCKWFd7yjvl4FXwdfOleVXxAkh0BmqJLYHSSp2KXb4o5/1dvBMzC0OhbjGgBwGDTFo1BD5dpRIv89AxIBskNc7j0H7DY77MWod73l6XqTfnJ+rdPIsAuA1OcrxWKhE9/bPzyIUv/agLVyszAs4g8441V3FBAJ5K30FrcNiOT/th5Nvwglvm6oTPmkf+7SQJ0ZU5gCOjuiVo4R0oG2ilj07U4WrlauirKgscP+13GUXH0c4z57IvQUYRon+N9YLI0IR6eX93GP2ku+U23KUuE5UZm0SFK1ggHmzTrNg2jRCyLSKM5+1/aRLFrMIVxOibeRTt4H+X9UwNFUkigTmgYoCZmf+8GX2pdcag4KRkyLQfAXYg4aD17bOde8zPeop7o+XGEvklh8ygNMIyN4IR4Sg+t6MBYv4r7WvwbqsPn6Zua3i4zNqnlF732A8cXMn+H0TKUyC0CyQji9coYWhFM0vuiRI0vDBZI9mozIBkCenJE9Df5SXghH9KDGFOvU3rMCu5ikdEk=
