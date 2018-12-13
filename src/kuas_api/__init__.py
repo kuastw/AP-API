@@ -7,7 +7,7 @@ Created on 08/29/2015
 from flask import Flask
 import flask_admin as admin
 from flask_sqlalchemy import SQLAlchemy
-from flask.ext.compress import Compress
+from flask_compress import Compress
 
 __version__ = "2.0"
 

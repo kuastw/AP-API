@@ -1,14 +1,33 @@
 version: '3.6'
 services:
   web:
-      image: web
-      build: 
-        context: . 
-        dockerfile: Dockerfile
-      ports:
-      - "5001:5001"
-      volumes:
-      - .:/usr/src/app
-      command: [ "python", "src/web-server.py"]
+    image: web
+    build: 
+      context: . 
+      dockerfile: Dockerfile
+    ports:
+    - "5001:5001"
+    volumes:
+    - .:/usr/src/app
+    command: [ "python", "src/web-server.py"]
+    networks:
+      - redis-net
+    depends_on:
+      - redis
   redis:
-      image: "redis:alpine"
+    image: "redis:alpine"
+    ports:
+    - "6379:6379"
+    volumes:
+      - redis-data:/data
+    environment:
+      - SECRET_KEY=123456790
+      - REDIS_URL=redis://redis/0
+    networks:
+      - redis-net
+
+networks:
+  redis-net:
+
+volumes:
+  redis-data:

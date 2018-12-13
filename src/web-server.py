@@ -1,5 +1,5 @@
 from kuas_api import app
-from flask.ext.compress import Compress
+from flask_compress import Compress
 
 if __name__ == "__main__":
     Compress(app)
