@@ -1,4 +1,4 @@
-flask
+flask<1.0
 flask_apiblueprint
 flask_autodoc
 flask_cors

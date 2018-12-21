@@ -21,8 +21,7 @@ services:
     volumes:
       - redis-data:/data
     environment:
-      - SECRET_KEY=123456790
-      - REDIS_URL=redis://redis/0
+      - REDIS_URL=redis://redis:6379/0
     networks:
       - redis-net
 

@@ -26,7 +26,8 @@ news_db = SQLAlchemy(app)
 
 # Let secret key go in
 import redis
-red = redis.StrictRedis(db=2)
+red = redis.StrictRedis.from_url(url= 'redis://redis:6379/0',db=2)
+
 red.set("SECRET_KEY", str(app.config["SECRET_KEY"]))
 
 
