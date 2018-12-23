@@ -30,17 +30,17 @@ def get_user_info(session):
         "education_system": "",
         "department": "",
         "class": "",
-        "student_id": "",
-        "student_name_cht": "",
+        "student_id": g.username,
+        "student_name_cht": "畢業生",
         "student_name_eng": ""
     }
-
-    result["education_system"] = td[3].text[5:]
-    result["department"] = td[4].text[5:]
-    result["class"] = td[8].text[5:]
-    result["student_id"] = td[9].text[5:]
-    result["student_name_cht"] = td[10].text[5:]
-    result["student_name_eng"] = td[11].text[5:]
+    if len(td) > 3 :
+        result["education_system"] = td[3].text[5:]
+        result["department"] = td[4].text[5:]
+        result["class"] = td[8].text[5:]
+        result["student_id"] = td[9].text[5:]
+        result["student_name_cht"] = td[10].text[5:]
+        result["student_name_eng"] = td[11].text[5:]
 
     return result
 

@@ -52,30 +52,28 @@ def login(username, password):
     try:
         is_login["ap"] = ap.login(session, username, password)
     except:
-        pass
+        is_login["ap"] = False
 
     # Login bus system
     try:
         bus.init(session)
         is_login["bus"] = bus.login(session, username, password)
     except:
-        pass
+        is_login["bus"] = False
 
     # Login leave system
     #try:
     #    is_login["leave"] = leave.login(session, username, password)
     #except:
     #    pass
-
-    if all(is_login.values()):
-        return dump_session_cookies(session)
-    else:
-        return False
+    print(is_login['ap'])
+    print(is_login['bus'])
+    return dump_session_cookies(session)
 
 
 def ap_query(session, qid=None, args=None,
              username=None, expire=AP_QUERY_EXPIRE):
-    ap_query_key_tag = str(username) + str(args) + SECRET_KEY
+    ap_query_key_tag = str(username) + str(args) +  str(SECRET_KEY)
     ap_query_key = qid + \
         hashlib.sha512(
             bytes(ap_query_key_tag, "utf-8")).hexdigest()

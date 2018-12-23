@@ -10,7 +10,7 @@ services:
     - "2087:5001"
     volumes:
     - .:/usr/src/app
-    command: [ "python", "src/web-server.py"]
+    command: [ "python3","-u", "src/web-server.py"]
     networks:
       - redis-net
     depends_on:
