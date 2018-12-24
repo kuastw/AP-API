@@ -68,7 +68,10 @@ def login(username, password):
     #    pass
     print(is_login['ap'])
     print(is_login['bus'])
-    return dump_session_cookies(session)
+    if is_login["ap"]: 
+        return dump_session_cookies(session)
+    else:
+        return False 
 
 
 def ap_query(session, qid=None, args=None,
