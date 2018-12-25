@@ -12,3 +12,4 @@ lxml
 pyexecjs
 sphinxcontrib-httpdomain
 gunicorn
+pyopenssl

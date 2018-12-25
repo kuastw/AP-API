@@ -6,7 +6,6 @@ services:
       context: . 
       dockerfile: Dockerfile
     ports:
-    - "2086:5001"
     - "2087:5001"
     volumes:
     - .:/usr/src/app
