@@ -75,8 +75,7 @@ def get_auth_token():
     return jsonify(
         auth_token=token.decode('ascii'),
         token_type="Basic",
-        duration=const.token_duration,
-        feture = token
+        duration=const.token_duration
         )
 
 
