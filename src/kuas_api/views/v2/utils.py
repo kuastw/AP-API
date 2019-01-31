@@ -75,7 +75,9 @@ def get_auth_token():
     return jsonify(
         auth_token=token.decode('ascii'),
         token_type="Basic",
-        duration=const.token_duration)
+        duration=const.token_duration,
+        feture = token
+        )
 
 
 @route('/versions/<string:device_type>')

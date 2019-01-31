@@ -30,7 +30,7 @@ SECRET_KEY = red.get("SECRET_KEY") if red.exists(
     "SECRET_KEY") else str(os.urandom(32))
 
 
-def dump_session_cookies(session):
+def dump_session_cookies(session,is_login):
     """Dumps cookies to list
     """
 
@@ -39,7 +39,8 @@ def dump_session_cookies(session):
         cookies.append({
             'name': c.name,
             'domain': c.domain,
-            'value': c.value})
+            'value': c.value,
+            'is_login':is_login})
 
     return cookies
 
@@ -69,7 +70,7 @@ def login(username, password):
     print(is_login['ap'])
     print(is_login['bus'])
     if is_login["ap"]: 
-        return dump_session_cookies(session)
+        return dump_session_cookies(session,is_login)
     else:
         return False 
 

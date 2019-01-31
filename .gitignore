@@ -228,3 +228,5 @@ src/config.py
 src/gunicorn_cfg.py
 
 \.vscode/
+
+\.idea/
