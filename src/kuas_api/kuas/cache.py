@@ -39,9 +39,9 @@ def dump_session_cookies(session,is_login):
         cookies.append({
             'name': c.name,
             'domain': c.domain,
-            'value': c.value,
-            'is_login':is_login})
+            'value': c.value})
 
+    cookies.append({'is_login': is_login})
     return cookies
 
 
@@ -67,8 +67,7 @@ def login(username, password):
     #    is_login["leave"] = leave.login(session, username, password)
     #except:
     #    pass
-    print(is_login['ap'])
-    print(is_login['bus'])
+    is_login["leave"] = False
     if is_login["ap"]: 
         return dump_session_cookies(session,is_login)
     else:
