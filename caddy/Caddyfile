@@ -1,0 +1,13 @@
+nkust-ap.rainvisitor.me:2087 {
+
+				proxy / localhost:14769 {
+				}
+
+				header / {
+					
+				}
+
+				gzip
+
+				tls nkust-ap.rainvisitor.me
+}

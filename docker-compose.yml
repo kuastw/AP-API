@@ -6,10 +6,10 @@ services:
       context: . 
       dockerfile: Dockerfile
     ports:
-    - "2087:5001"
+    - "14769:14769"
     volumes:
     - .:/usr/src/app
-    command: [ "python3","-u", "src/web-server.py"]
+    command: [ "gunicorn","-c","gunicorn_cfg.py","web-server:app"]
     networks:
       - redis-net
     depends_on:
@@ -24,7 +24,17 @@ services:
       - REDIS_URL=redis://redis:6379/0
     networks:
       - redis-net
-
+  caddy:
+    image: "wemakeservices/caddy-docker:latest"
+    volumes:
+      - ./caddy/path:/root/.caddy  # to save certificates on disk
+      - ./caddy/Caddyfile:/etc/Caddyfile  # to mount custom Caddyfile
+    ports:
+      - "2015:2015"
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web
 networks:
   redis-net:
 
