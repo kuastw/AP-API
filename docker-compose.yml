@@ -31,7 +31,9 @@ services:
       - ./caddy/Caddyfile:/etc/Caddyfile
     ports:
       - "2015:2015"
-      - "${CADDY_HOST_HTTPS_PORT}:443"
+      - "80:80"
+      - "443:443"
+      - "${CADDY_HOST_HTTPS_PORT}:2087"
     environment:
       - ACME_AGREE=true
     depends_on:
