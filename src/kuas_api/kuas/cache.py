@@ -41,8 +41,7 @@ def dump_session_cookies(session,is_login):
             'domain': c.domain,
             'value': c.value})
 
-    cookies.append({'is_login': is_login})
-    return cookies
+    return {'is_login': is_login, 'cookies':cookies}
 
 
 def login(username, password):

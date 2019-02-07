@@ -230,3 +230,4 @@ src/gunicorn_cfg.py
 \.vscode/
 
 \.idea/
+caddy/Caddyfile

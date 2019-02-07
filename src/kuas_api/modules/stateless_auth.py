@@ -43,7 +43,7 @@ def set_cookies(s, username):
     :type username: str
     :return: None
     """
-    cookies = json.loads(str(red.get(username), "utf-8"))
+    cookies = json.loads(str(red.get(username), "utf-8"))['cookies']
 
     for c in cookies:
         s.cookies.set(c['name'], c['value'], domain=c['domain'])

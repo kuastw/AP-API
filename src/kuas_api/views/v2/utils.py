@@ -71,16 +71,13 @@ def get_auth_token():
           "auth_token": "adfakdflakds.fladkjflakjdf.adslkfakdadf"
         }
     """
-    s = {'ap':False,'bus':False}
-    for i in json.loads(str(cache.red.get(g.username), "utf-8")):
-        if 'is_login' in i:
-            s = i['is_login']
+    is_login = json.loads(str(cache.red.get(g.username), "utf-8"))['is_login']
     token = g.token
     return jsonify(
         auth_token=token.decode('ascii'),
         token_type="Basic",
         duration=const.token_duration,
-        is_login= s
+        is_login= is_login
         )
 
 

@@ -1,0 +1,8 @@
+0.0.0.0:443 {
+	proxy / web:14769 {
+	}
+	header / {
+	}
+	gzip
+	tls example@gmail.com
+}
