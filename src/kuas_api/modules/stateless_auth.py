@@ -18,7 +18,7 @@ import kuas_api.modules.error as error
 auth = HTTPBasicAuth()
 
 # Redis connection
-red = redis.StrictRedis.from_url(url='redis://redis:6379/0', db=2)
+red = redis.StrictRedis.from_url(url=os.environ['REDIS_URL'], db=2)
 
 # Shit lazy key
 DIRTY_SECRET_KEY = red.get("SECRET_KEY") if red.exists(

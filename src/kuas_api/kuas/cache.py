@@ -25,7 +25,7 @@ BUS_QUERY_TAG = "bus"
 NOTIFICATION_TAG = "notification"
 
 s_cache = SimpleCache()
-red = redis.StrictRedis.from_url(url= 'redis://redis:6379/0',db=2)
+red = redis.StrictRedis.from_url(url= os.environ['REDIS_URL'],db=2)
 SECRET_KEY = red.get("SECRET_KEY") if red.exists(
     "SECRET_KEY") else str(os.urandom(32))
 

@@ -8,6 +8,7 @@ from flask import Flask
 import flask_admin as admin
 from flask_sqlalchemy import SQLAlchemy
 from flask_compress import Compress
+import os
 
 __version__ = "2.0"
 
@@ -26,7 +27,7 @@ news_db = SQLAlchemy(app)
 
 # Let secret key go in
 import redis
-red = redis.StrictRedis.from_url(url= 'redis://redis:6379/0',db=2)
+red = redis.StrictRedis.from_url(url= os.environ['REDIS_URL'],db=2)
 
 red.set("SECRET_KEY", str(app.config["SECRET_KEY"]))
 
