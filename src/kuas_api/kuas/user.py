@@ -31,8 +31,10 @@ def get_user_info(session):
         "department": "",
         "class": "",
         "student_id": g.username,
-        "student_name_cht": "畢業生",
-        "student_name_eng": ""
+        "student_name_cht": "",
+        "student_name_eng": "",
+        "status": 200,
+        "message": ""
     }
     if len(td) > 3 :
         result["education_system"] = td[3].text[5:]
@@ -41,7 +43,10 @@ def get_user_info(session):
         result["student_id"] = td[9].text[5:]
         result["student_name_cht"] = td[10].text[5:]
         result["student_name_eng"] = td[11].text[5:]
-
+    else :
+        result["status"] = 204
+        result["message"] = td[0].text
+    
     return result
 
 
