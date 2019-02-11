@@ -28,9 +28,10 @@ services:
     networks:
       - redis-net
   caddy:
-    image: "abiosoft/caddy:0.11.3"
+    image: "abiosoft/caddy:latest"
     volumes:
       - ./caddy/Caddyfile:/etc/Caddyfile
+      - ./caddy/path:/root/.caddy
     ports:
       - "2015:2015"
       - "80:80"
