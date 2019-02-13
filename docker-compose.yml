@@ -1,12 +1,7 @@
 version: '3.6'
 services:
   web:
-    image: web
-    build: 
-      context: . 
-      dockerfile: Dockerfile
-    ports:
-    - "14769:14769"
+    image: "abc873693/ap-api:latest"
     volumes:
     - .:/usr/src/app
     environment:
@@ -19,12 +14,8 @@ services:
       - redis
   redis:
     image: "redis:alpine"
-    ports:
-    - "6379:6379"
     volumes:
       - redis-data:/data
-    environment:
-      - REDIS_URL=redis://redis:6379/0
     networks:
       - redis-net
   caddy:
