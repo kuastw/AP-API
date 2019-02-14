@@ -1,6 +1,7 @@
 0.0.0.0:2087 {
-	proxy / web:14769 {
+	proxy / https://web:14769 {
 		transparent
+		insecure_skip_verify
 	}
 	gzip
 	tls example@gmail.com
