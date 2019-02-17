@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   web:
-    image: "abc873693/ap-api:latest"
+    image: "nkustitc/ap-api:latest"
     build: 
       context: . 
       dockerfile: Dockerfile
