@@ -4,8 +4,7 @@
 NKUST - API
 ==========
 
-高雄科技大學 API Server  
-NKUST API Server
+高雄科技大學 API Server NKUST API Server
 ---------------------------
 Requirement
 ---
