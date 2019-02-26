@@ -111,14 +111,20 @@ def get_semester_list():
     login(s, AP_GUEST_ACCOUNT, AP_GUEST_PASSWORD)
 
     content = query(s, "ag304_01")
+    if len(content)<3000:
+        return [{}]
     root = etree.HTML(content)
 
-    options = root.xpath("id('yms_yms')/option")
-    options = map(lambda x: {"value": x.values()[0].replace("#", ","),
-                             "selected": 1 if "selected" in x.values() else 0,
-                             "text": x.text},
-                  root.xpath("id('yms_yms')/option")
-                  )
+    #options = root.xpath("id('yms_yms')/option")
+    try:
+        options = map(lambda x: {"value": x.values()[0].replace("#", ","),
+                                "selected": 1 if "selected" in x.values() else 0,
+                                "text": x.text},
+                    root.xpath("id('yms_yms')/option")
+                    )
+    except:
+        return [{}]
+    
     options = list(options)
 
     return options
@@ -185,3 +191,4 @@ def query(session, qid, args={}):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+    #print(get_semester_list())
