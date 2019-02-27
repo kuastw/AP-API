@@ -6,7 +6,7 @@ __version__ = 2.0
 
 import requests
 from lxml import etree
-
+import kuas_api.kuas.cache as cache
 # AP URL Setting
 #: AP sytem base url
 AP_BASE_URL = "http://webap.nkust.edu.tw"
@@ -110,9 +110,9 @@ def get_semester_list():
     s = requests.Session()
     login(s, AP_GUEST_ACCOUNT, AP_GUEST_PASSWORD)
 
-    content = query(s, "ag304_01")
+    content = cache.ap_query(s, "ag304_01")
     if len(content)<3000:
-        return [{}]
+        return False
     root = etree.HTML(content)
 
     #options = root.xpath("id('yms_yms')/option")
@@ -123,7 +123,7 @@ def get_semester_list():
                     root.xpath("id('yms_yms')/option")
                     )
     except:
-        return [{}]
+        return False
     
     options = list(options)
 
@@ -171,9 +171,9 @@ def query(session, qid, args={}):
             "fncid": "", "uid": ""}
 
     data['fncid'] = qid
-
-    for key in args:
-        data[key] = args[key]
+    if args != None:
+        for key in args:
+            data[key] = args[key]
 
     try:
         resp = session.post(AP_QUERY_URL % (qid[:2], qid),
@@ -184,11 +184,10 @@ def query(session, qid, args={}):
         content = resp.text
     except requests.exceptions.ReadTimeout:
         content = ""
-
     return content
 
 
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
-    #print(get_semester_list())
+    #import doctest
+    #doctest.testmod()
+    print(get_semester_list())

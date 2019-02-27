@@ -3,7 +3,7 @@ import json
 
 from flask import request, g
 from flask_cors import *
-
+from flask import abort
 import kuas_api.kuas.ap as ap
 import kuas_api.kuas.user as user
 import kuas_api.kuas.cache as cache
@@ -716,6 +716,9 @@ def ap_semester():
         }
     """
     semester_list = ap.get_semester_list()
+    if semester_list == False:
+      return  abort(502)
+
     default_yms = list(
         filter(lambda x: x['selected'] == 1, semester_list))[0]
 
