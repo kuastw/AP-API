@@ -715,7 +715,7 @@ def ap_semester():
           ]
         }
     """
-    semester_list = ap.get_semester_list()
+    semester_list = cache.get_semester_list()
     if semester_list == False:
       return  abort(502)
 

@@ -6,7 +6,6 @@ __version__ = 2.0
 
 import requests
 from lxml import etree
-import kuas_api.kuas.cache as cache
 # AP URL Setting
 #: AP sytem base url
 AP_BASE_URL = "http://webap.nkust.edu.tw"
@@ -27,7 +26,6 @@ AP_GUEST_PASSWORD = "123"
 # Timeout Setting
 #: Login timeout
 LOGIN_TIMEOUT = 5.0
-
 #: Query timeout
 QUERY_TIMEOUT = 5.0
 
