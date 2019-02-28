@@ -98,24 +98,24 @@ def getList(session, year="102", semester="2"):
             del r[-1]
 
         leave_list.append(r)
-
     result = []
     for r in leave_list[1:]:
+        i = len(r)-15
+        for approved in range(4,i):
+            r[3]+= ' , '+r[approved]
         leave = {
             "leave_sheet_id": r[1].replace("\xa0", ""),
             "date": r[2],
             "instructors_comment": r[3],
             "leave_sections": [
                 {"section": leave_list[0][index + 4], "reason": s}
-                for index, s in enumerate(r[4:])
+                for index,s in enumerate(r[i:])
             ]
         }
 
         leave["leave_sections"] = list(
             filter(lambda x: x["reason"], leave["leave_sections"]))
-
         result.append(leave)
-
     return result
 
 
@@ -219,4 +219,6 @@ if __name__ == '__main__':
     s = requests.session()
     login(s, "", "")
     #print(submitLeave(s, '103/09/25', '103/09/25', {"reason_id": "21", "reason_text": "testing", "section": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]}))
-
+    # for test 
+    # import json
+    # print(json.dumps(getList(s,year='107',semester='1'),ensure_ascii=False))
