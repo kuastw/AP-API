@@ -5,7 +5,7 @@ from lxml import etree
 
 s = requests.session()
 
-SUBMIT_LEAVE_URL = "https://leave.kuas.edu.tw:446/CK001MainM.aspx"
+SUBMIT_LEAVE_URL = "http://leave.nkust.edu.tw/CK001MainM.aspx"
 
 TIMEOUT = 5.0
 
@@ -15,7 +15,7 @@ def status():
 
     try:
         leave_status = requests.head(
-            "https://leave.kuas.edu.tw:446/", timeout=TIMEOUT).status_code
+            "http://leave.nkust.edu.tw/", timeout=TIMEOUT).status_code
     except:
         pass
 
@@ -24,10 +24,18 @@ def status():
 
 def login(session, username, password):
     try:
-        r = session.get("https://leave.kuas.edu.tw:446/LogOn.aspx", timeout=TIMEOUT)
+        session.headers.update({
+        'Origin': 'http://leave.nkust.edu.tw',
+        'Upgrade-Insecure-Requests': '1',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Referer': 'http://leave.nkust.edu.tw/LogOn.aspx',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7,ja;q=0.6'
+            })
+        r = session.get("http://leave.nkust.edu.tw/LogOn.aspx", timeout=TIMEOUT)
     except requests.exceptions.ReadTimeout:
         return False
-
     root = etree.HTML(r.text)
 
     form = {}
@@ -38,8 +46,12 @@ def login(session, username, password):
 
     form['Login1$UserName'] = username
     form['Login1$Password'] = password
+    form['__EVENTTARGET	'] = ''
+    form['__EVENTARGUMENT	']=''
 
-    r = session.post('https://leave.kuas.edu.tw:446/LogOn.aspx', data=form)
+
+    r = session.post('http://leave.nkust.edu.tw/LogOn.aspx', data=form)
+
     root = etree.HTML(r.text)
 
     if root.xpath("//td[@align='center' and @style='color:Red;' and @colspan='2']"):
@@ -50,20 +62,20 @@ def login(session, username, password):
 
 def getList(session, year="102", semester="2"):
     root = etree.HTML(
-        session.get("https://leave.kuas.edu.tw:446/AK002MainM.aspx").text)
+        session.get("http://leave.nkust.edu.tw/AK002MainM.aspx").text)
 
     form = {}
     for i in root.xpath("//input"):
         form[i.attrib["name"]] = i.attrib[
             "value"] if "value" in i.attrib else ""
-
+    #print(form)
     del form['ctl00$ButtonLogOut']
 
     form[
         'ctl00$ContentPlaceHolder1$SYS001$DropDownListYms'] = "%s-%s" % (year, semester)
 
     r = session.post(
-        "https://leave.kuas.edu.tw:446/AK002MainM.aspx", data=form)
+        "http://leave.nkust.edu.tw/AK002MainM.aspx", data=form)
     root = etree.HTML(r.text)
 
     tr = root.xpath("//table")[-1]
@@ -204,6 +216,7 @@ def submitLeave(session, start_date, end_date, leave_dict):
 
 
 if __name__ == '__main__':
-    login(s, "1102108133", "111")
+    s = requests.session()
+    login(s, "", "")
     #print(submitLeave(s, '103/09/25', '103/09/25', {"reason_id": "21", "reason_text": "testing", "section": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"]}))
-    print(getList(s, "103", "1"))
+

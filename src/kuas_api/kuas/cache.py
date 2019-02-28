@@ -68,11 +68,10 @@ def login(username, password):
         is_login["bus"] = False
 
     # Login leave system
-    #try:
-    #    is_login["leave"] = leave.login(session, username, password)
-    #except:
-    #    pass
-    is_login["leave"] = False
+    try:
+        is_login["leave"] = leave.login(session, username, password)
+    except:
+        is_login["leave"] = False
     if is_login["ap"]: 
         return dump_session_cookies(session,is_login)
     else:
