@@ -31,30 +31,37 @@ $ python src/web-server.py
 ```
 By docker  
 ---
-If redis host in localhost
+Requirement
+* Redis instance running on localhost
 
-Need to add environment variable **REDIS_URL=redis://127.0.0.1:6379/0** and **--network="host"**
+Need to add environment variable **REDIS_URL=redis://127.0.0.1:6379/0**
+
+And let docker run host network need add  **--network="host"**
 
 Otherwise redis config by docker network(see docker-compose.yml config)
 
-Command **gunicorn_cfg.py web-server:app** is production flask uWSGI,or replace by **python3 web-server.py**
+Arguments **gunicorn_cfg.py web-server:app** is production flask uWSGI
 ```
 $ sudo docker run -e REDIS_URL=redis://127.0.0.1:6379/0  --network="host" nkustitc/ap-api:latest gunicorn -c gunicorn_cfg.py web-server:app
 ```
-By docker-compose (Production)
+or replace by **python3 web-server.py**
+```
+$ sudo docker run -e REDIS_URL=redis://127.0.0.1:6379/0  --network="host" nkustitc/ap-api:latest python3 web-server.py
+```
+By docker-compose
 ---
-copy .env example
+Copy .env example
 - CADDY_HOST_HTTPS_PORT -> caddy https host port
 - REDIS_URL -> python request redis url
 ```
 $ cp env.example .env
 ```
-copy caddy host config example
+Copy caddy host config example
 ```
 $ cd caddy
 $ cp Caddyfile.example Caddyfile
 ```
-edit host config
+Edit **Caddyfile**'s host config**(Production)**
 - line 1 **0.0.0.0:2087** replace by you want host domain and port
 ```
 0.0.0.0:2087 {
