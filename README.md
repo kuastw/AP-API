@@ -34,7 +34,13 @@ By docker
 Requirement
 * Redis instance running on localhost
 
-Need to add environment variable **REDIS_URL=redis://127.0.0.1:6379/0**
+Need to add environment variable **-e  REDIS_URL=redis://127.0.0.1:6379/0**
+
+or by export
+
+```
+$ export REDIS_URL=redis://127.0.0.1:6379/0
+```
 
 And let docker run host network need add  **--network="host"**
 
@@ -42,11 +48,11 @@ Otherwise redis config by docker network(see docker-compose.yml config)
 
 Arguments **gunicorn_cfg.py web-server:app** is production flask uWSGI
 ```
-$ sudo docker run -e REDIS_URL=redis://127.0.0.1:6379/0  --network="host" nkustitc/ap-api:latest gunicorn -c gunicorn_cfg.py web-server:app
+$ sudo docker run --network="host" nkustitc/ap-api:latest gunicorn -c gunicorn_cfg.py web-server:app
 ```
 or replace by **python3 web-server.py**
 ```
-$ sudo docker run -e REDIS_URL=redis://127.0.0.1:6379/0  --network="host" nkustitc/ap-api:latest python3 web-server.py
+$ sudo docker run --network="host" nkustitc/ap-api:latest python3 web-server.py
 ```
 By docker-compose
 ---
