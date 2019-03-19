@@ -147,39 +147,31 @@ def submitLeave(session, start_date, end_date, leave_dict):
     root = etree.HTML(r.text)
 
     d = {i.attrib['name']: i.attrib['value'] for i in root.xpath("//input[starts-with(@id, '__')]")}
-    d["ctl00$ContentPlaceHolder1$CK001$DateUCCBegin$text1"] = start_date
-    d["ctl00$ContentPlaceHolder1$CK001$DateUCCEnd$text1"] = end_date
-    d["ctl00$ContentPlaceHolder1$CK001$ButtonCommit"] = u"下一步"
+    d['ctl00$ContentPlaceHolder1$CK001$DateUCCBegin$text1'] = start_date
+    d['ctl00$ContentPlaceHolder1$CK001$DateUCCEnd$text1'] = end_date
+    d['ctl00$ContentPlaceHolder1$CK001$ButtonCommit'] = u'下一步'
 
     # Setting leaving section
     r = session.post(SUBMIT_LEAVE_URL, data=d)
     root = etree.HTML(r.text)
-
-    reason_map = {"21": u"事", "22": u"病", "23": u"公", "24": u"喪", "26": u"產"}
-
     # Setting reason id
     d = {i.attrib['name']: i.attrib['value'] for i in root.xpath("//input[starts-with(@id, '__')]")}
-    d['ctl00$ContentPlaceHolder1$CK001$RadioButtonListOption'] = leave_dict[
-        "reason_id"]
-    d['ctl00$ContentPlaceHolder1$CK001$TextBoxReason'] = ""
+    d['ctl00$ContentPlaceHolder1$CK001$RadioButtonListOption'] = leave_dict['reason_id']
+    d['ctl00$ContentPlaceHolder1$CK001$TextBoxReason'] = ''
     r = session.post(SUBMIT_LEAVE_URL, data=d)
 
     # Get Teacher id
-    teacher_id = root.xpath("//option[@selected='selected']")[0].values()[-1]
-
+    teacher_id = root.xpath('//*[@id="ContentPlaceHolder1_CK001_ddlTeach"]/option[@selected="selected"]')[0].attrib['value']
+    
     # Setting leaving button
-    button = root.xpath(
-        "//input[starts-with(@id, 'ContentPlaceHolder1_CK001_GridViewMain_Button_')]")
+    button = root.xpath("//input[starts-with(@id, 'ContentPlaceHolder1_CK001_GridViewMain_Button_')]")
 
     for i in leave_dict["section"]:
         root = etree.HTML(r.text)
         d = {i.attrib['name']: i.attrib['value'] for i in root.xpath("//input[starts-with(@id, '__')]")}
-        d['ctl00$ContentPlaceHolder1$CK001$RadioButtonListOption'] = leave_dict[
-            "reason_id"]
-        d['ctl00$ContentPlaceHolder1$CK001$TextBoxReason'] = leave_dict[
-            'reason_text']
-        d['ctl00$ContentPlaceHolder1$CK001$DropDownListTeacher'] = root.xpath(
-            "//option[@selected='selected']")[0].values()[-1]
+        d['ctl00$ContentPlaceHolder1$CK001$RadioButtonListOption'] = leave_dict['reason_id']
+        d['ctl00$ContentPlaceHolder1$CK001$TextBoxReason'] = leave_dict['reason_text']
+        d['ctl00$ContentPlaceHolder1$CK001$ddlTeach'] = teacher_id
         d[button[int(i)].attrib['name']] = ''
         d['__ASYNCPOST'] = "ture"
         r = session.post(SUBMIT_LEAVE_URL, data=d)
@@ -187,8 +179,8 @@ def submitLeave(session, start_date, end_date, leave_dict):
     # Send to last step
     root = etree.HTML(r.text)
     d = {i.attrib['name']: i.attrib['value'] for i in root.xpath("//input[starts-with(@id, '__')]")}
-    d['ctl00$ContentPlaceHolder1$CK001$TextBoxReason'] = leave_dict[
-        'reason_text']
+    d['ctl00$ContentPlaceHolder1$CK001$TextBoxReason'] = leave_dict['reason_text']
+    d['ctl00$ContentPlaceHolder1$CK001$ddlTeach'] = teacher_id
     d['ctl00$ContentPlaceHolder1$CK001$ButtonCommit2'] = "下一步"
     r = session.post(SUBMIT_LEAVE_URL, data=d)
 
@@ -196,11 +188,10 @@ def submitLeave(session, start_date, end_date, leave_dict):
     root = etree.HTML(r.text)
     d = {i.attrib['name']: i.attrib['value'] for i in root.xpath("//input[starts-with(@id, '__')]")}
     d['ctl00$ContentPlaceHolder1$CK001$ButtonSend'] = '存檔'
-    files = {"ctl00$ContentPlaceHolder1$CK001$FileUpload1":
-             (" ", "", "application/octet-stream")}
+    #files = {'ctl00$ContentPlaceHolder1$CK001$FileUpload1': (' ', '', 'application/octet-stream')}
 
     # Send to server and save the submit
-    r = session.post(SUBMIT_LEAVE_URL, files=files, data=d)
+    r = session.post(SUBMIT_LEAVE_URL, data=d)
     root = etree.HTML(r.text)
 
     try:
@@ -208,7 +199,7 @@ def submitLeave(session, start_date, end_date, leave_dict):
         return_value = return_value[
             return_value.index('"') + 1: return_value.rindex('"')]
     except:
-        return_value = "Error..."
+        return_value = 'Error...'
 
     return_success = True if return_value == u'假單存檔成功，請利用假單查詢進行後續作業。' else False
 

@@ -4,7 +4,6 @@ import requests
 
 from flask import request, g
 from flask_cors import *
-
 import kuas_api.kuas.cache as cache
 
 from kuas_api.modules.stateless_auth import auth
@@ -19,7 +18,6 @@ from .doc import auto
 # not sure isn't this a best practice now.
 # https://github.com/mitsuhiko/flask/issues/593
 routes = []
-
 
 def route(rule, **options):
     def decorator(f):
@@ -142,9 +140,9 @@ def leave_submit():
             'reason_text'] if 'reason_text' in request.form else None
         section = json.loads(
             request.form['section']) if 'section' in request.form else None
-
-        s = requests.session()
-        set_cookies(s, session['c'])
+        #s = requests.session()
+        s = stateless_auth.get_requests_session_with_cookies()
+        # set_cookies(s, session['c'])
 
         start_date = start_date.split("/")
         start_date[0] = str(int(start_date[0]) - 1911)
@@ -155,10 +153,11 @@ def leave_submit():
         end_date = "/".join(end_date)
 
         # Fixing, don't send it
-        return json.dumps((False, "請假維修中, 目前無法請假~"), ensure_ascii=False)
+        #
+        # return json.dumps((False, "請假維修中, 目前無法請假~"), ensure_ascii=False)
 
         # Fixed
-        # if reason_id and reason_text and section:
-        #    return json.dumps(cache.leave_submit(s, start_date, end_date, reason_id, reason_text, section))
-        # else:
-        #    return json.dumps((False, "Error..."))
+        if reason_id and reason_text and section:
+           return json.dumps(cache.leave_submit(s, start_date, end_date, reason_id, reason_text, section))
+        else:
+           return json.dumps((False, "Error..."))
