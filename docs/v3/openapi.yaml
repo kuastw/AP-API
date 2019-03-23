@@ -208,7 +208,7 @@ paths:
                   department:
                     type: string
                     description: department
-                  class:
+                  className:
                     type: string
                     description: class
                   id:
@@ -220,7 +220,7 @@ paths:
                   nameEng:
                     type: string
                     description: student english name
-              example: {"educationSystem": "日間部四技", "department": "資訊工程系", "class": "四資工四甲", "id": "1104112345", "nameCht": "葉大雄", "nameEng": ""}
+              example: {"educationSystem": "日間部四技", "department": "資訊工程系", "className": "四資工四甲", "id": "1104112345", "nameCht": "葉大雄", "nameEng": ""}
         401:
           description: Token expired or Unauthorized Access
         404:
@@ -260,7 +260,7 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive        
-  /user/semester:
+  /user/semesters:
     get:
       tags:
       - User
@@ -296,6 +296,62 @@ paths:
                           type: string
                           description: text
               example: {"semester": [{"value": "107,1","text": "107學年度第1學期"},{"value": "107,2","text": "107學年度第2學期"}],"default": {"value": "107,2","text": "107學年度第2學期"}}
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
+  /user/midterm-alerts:
+    get:
+      tags:
+      - User
+      summary: get user's midterm alerts
+      description: "Retrun this semester midterm alerts list"
+      security:
+        - JSON-Web-Token: []
+      parameters: 
+      responses:
+        200:
+          description: return midterm alerts by year and semester
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  courseList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        enrty:
+                          type: string
+                          description: order
+                        className:
+                          type: string
+                          description: class name
+                        title:
+                          type: string
+                          description: title
+                        group:
+                          type: string
+                          description: group
+                        instructors:
+                          type: string
+                          description: course teacher
+                        reason:
+                          type: string
+                          description: reason
+                        remark:
+                          type: string
+                          description: text
+              example: {"courseList":[{"entry":"01","className":"四資工甲","title":"專業倫理","group":"01","instructors":"陳洳瑾","reason":"不認真","remark":"還是不認真"}]}
         400: 
           description: Bad Request
         401:
@@ -381,7 +437,7 @@ paths:
                       classPercentage:
                           type: string
                           description: percentage in class
-              example: {"scores":{"scores":[{"title":"專業倫理","units":"1.0","hours":"1.0","required":"【必修】","at":"【學期】","middleScore":"*","finalScore":"96.00","remark":""},{"title":"核心通識(三)-現今科技議題","units":"2.0","hours":"2.0","required":"【必修】","at":"【學期】","middleScore":"*","finalScore":"69.00","remark":""}],"detail":{"conduct":82,"average":39,"classRank":"57/57","classPercentage":100}}}
+              example: {"scores":[{"title":"專業倫理","units":"1.0","hours":"1.0","required":"【必修】","at":"【學期】","middleScore":"*","finalScore":"96.00","remark":""},{"title":"核心通識(三)-現今科技議題","units":"2.0","hours":"2.0","required":"【必修】","at":"【學期】","middleScore":"*","finalScore":"69.00","remark":""}],"detail":{"conduct":82,"average":39,"classRank":"57/57","classPercentage":100}}
         400: 
           description: Bad Request
         401:
@@ -422,7 +478,66 @@ paths:
             application/json:
               schema:
                 type: object
-              example: {"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","weekday":"R","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","weekday":"R","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timecode":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+              example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"code":"0434","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)2-4","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","weekday":"R","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","weekday":"R","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timecode":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
+  /user/reward-and-punishments:
+    get:
+      tags:
+      - User
+      summary: get user's reward and punishments
+      description: "If query parameters are empty then return the latest reward and punishments."
+      security:
+        - JSON-Web-Token: []
+      parameters: 
+      - in: query
+        name: "year"
+        description: "year of semeter"
+        schema:
+            type: integer
+            format: int64
+      - in: query
+        name: "semester"
+        description: "number of semester"
+        schema:
+            type: integer
+            format: int64 
+      responses:
+        200:
+          description: return reward and punishments by year and semester
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scores:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          description: title
+                        type:
+                          type: integer
+                          description: type
+                        counts:
+                          type: integer
+                          description: number of reward and punishments
+                        reason:
+                          type: string
+                          description: text
+              example: {"data":[{"date":"1040618","type":"小功","counts":2,"reason":"擔任幹部認真負責(副班長)"},{"date":"1040624","type":"嘉獎","counts":1,"reason":"擔任幹部認真負責"},{"date":"1040629","type":"嘉獎","counts":1,"reason":"辦理系學會活動盡心盡力"}]}
         400: 
           description: Bad Request
         401:
@@ -655,6 +770,62 @@ paths:
           description: Bad Request
         401:
           description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
+  /leaves/submit/info:
+    get:
+      tags:
+      - Leave
+      summary: get user's absentees submit permission and required data
+      description: ""
+      security:
+        - JSON-Web-Token: []
+      parameters:
+      responses:
+        200:
+          description: return score by year and semester
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tutors:
+                    type: array
+                    description: user's class teacher
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: teacher's name
+                  leavesType:
+                    type: object
+                    description: leaves type
+                    properties:
+                      id:
+                        type: string
+                        description: need use id apply leave submit
+                      title:
+                        type: string
+                        description: text
+                  timecode:
+                    type: array
+                    description: timecode use fill user need leave submit sections
+                    items:
+                      type: string
+              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        403:
+          description: User can't user this feature
         404:
           description: Page not found
         500:
