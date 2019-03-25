@@ -550,6 +550,72 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
+  /user/graduation-threshold:
+    get:
+      tags:
+      - User
+      summary: get user's graduation threshold state
+      security: 
+        - JSON-Web-Token: []
+      responses:
+        200:
+          description:  return user info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: student basic data
+                    properties:
+                      studentName:
+                        type: string
+                        description: student name
+                      className:
+                        type: string
+                        description: student's class name
+                      id:
+                        type: string
+                        description: student id
+                  englishPass:
+                    type: string
+                    description: school english graduation threshold pass state
+                  englishClassPass:
+                    type: string
+                    description: english ability class pass state
+                  internships:
+                    type: array
+                    description: internships class list
+                    items:
+                      type: object
+                      properties:
+                        year:
+                          type: string
+                          description: class of year
+                        semester:
+                          type: string
+                          description: class of semester
+                        code:
+                          type: string
+                          description: class of code
+                        name:
+                          type: string
+                          description: class of name
+                        score:
+                          type: integer
+                          description: class of score
+              example: {"data": {"studentName":"葉大雄","className":"四資工四甲","id":"1103412345"}, "englishPass": "通過", "englishClassPss": "及格通過", "internships": [{"year":"107","semester":"4","code":"0049","name":"校外實務實習(一)","score":85}]}
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
   /bus/timetables:
     get:
       tags:
@@ -585,9 +651,9 @@ paths:
                         departureTime:
                           type: string
                           description: course credit
-                        endStation:
+                        startStation:
                           type: string
-                          description: end station
+                          description: start station
                         busId:
                           type: string
                           description: bus id
@@ -609,13 +675,16 @@ paths:
                         specialTrain:
                           type: string
                           description: special train
+                        isReturnHomeBus:
+                          type: boolean
+                          description: is return home bus
                   date:
                     type: object
                     properties:
                       date:
                           type: string
                           description: ISO 8601 time
-              example: {"date":"2019-03-17T16:51:57Z","timetable":[{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","endStation":"燕巢","busId":"42705","reserveCount":2,"limitCount":999,"isReserve":true,"specialTrain":"0","discription":"","cancelKey":0},{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","endStation":"燕巢","busId":"42711","reserveCount":11,"limitCount":999,"isReserve":false,"SpecialTrain":"0","discription":"","cancelKey":0}]}
+              example: {"date":"2019-03-17T16:51:57Z","timetable":[{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42705","reserveCount":2,"limitCount":999,"isReserve":true,"specialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false},{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42711","reserveCount":11,"limitCount":999,"isReserve":false,"SpecialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false}]}
         400: 
           description: Bad Request
         401:
@@ -666,10 +735,16 @@ paths:
                         cancelKey:
                           type: string
                           description: cancel key for cancel reserved bus
-                        end:
+                        start:
                           type: string
-                          description: end station
-              example: {"reservation":[{"time":"2019-03-17T16:51:57Z","endTime":"2019-03-14T08:20Z","cancelKey":"2004434","end":"燕巢"},{"time":"2019-03-18T00:20Z","endTime":"2019-03-17T09:20Z","cancelKey":"2006005","end":"燕巢"},{"time":"2019-03-18T08:40Z","endTime":"2019-03-18T03:40Z","cancelKey":"2006006","end":"建工"}]}
+                          description: start station
+                        state:
+                          type: string
+                          description: bus reserve state
+                        travelState:
+                          type: string
+                          description: bus reserve travel state
+              example: {"reservation":[{"time":"2019-03-17T16:51:57Z","endTime":"2019-03-14T08:20Z","cancelKey":"2004434","start":"建工","state":"0","travelState":"0"},{"time":"2019-03-18T00:20Z","endTime":"2019-03-17T09:20Z","cancelKey":"2006005","start":"建工","state":"0","travelState":"0"},{"time":"2019-03-18T08:40Z","endTime":"2019-03-18T03:40Z","cancelKey":"2006006","start":"燕巢","state":"0","travelState":"0"}]}
         400: 
           description: Bad Request
         401:
@@ -732,6 +807,56 @@ paths:
           description: Bad Request
         401:
           description: Token expired or Unauthorized Access
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
+  /bus/violation-records:
+    get:
+      tags:
+      - Bus
+      summary: get bus violation records
+      description: ""
+      security:
+        - JSON-Web-Token: []
+      parameters: 
+      responses:
+        200:
+          description: return bus violation records
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservation:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          description: start time
+                        startStation:
+                          type: string
+                          description: start station
+                        isReturnHomeBus:
+                          type: boolean
+                          description: is return home bus
+                        amountend:
+                          type: string
+                          description: amountend of violation
+                        isPayment:
+                          type: string
+                          description: text
+              example: {"reservation":[{"time":"2019-03-17T16:51:57Z","startStation":"建工","isReturnHomeBus":false,"amountend":30,"isPayment":""}]}
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
         500:
           description: Internal Server Error
         503:
