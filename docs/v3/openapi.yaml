@@ -28,7 +28,7 @@ tags:
   description: Everything about library
     
 paths:
-  /auth/login:
+  /oauth/token:
     post:
       tags:
       - "Authentication"
@@ -51,17 +51,24 @@ paths:
           description: Username or password is incorrect
         504:
           description: All school server is not alive
-          
-  /auth/logout:
-    post:
+    delete:
+      tags:
+      - "Authentication"
+      summary: delete this token
+      responses:
+        205:
+          description: Logout sucess and client should reset content
+        400:
+          description: Bad Request
+        401:
+          description: Username or password is incorrect
+        504:
+          description: All school server is not alive
+  /oauth/token/all:
+    delete:
       tags:
       - "Authentication"
       summary: delete all token
-      requestBody:
-        content:
-          application/json:    
-            schema:            
-              $ref: '#/components/schemas/User'  
       responses:
         205:
           description: Logout sucess and client should reset content
@@ -1083,25 +1090,7 @@ components:
       example:   
         expireTime: "2019-03-16T20:16:04+08:00"
         token: "I6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtIjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJ"
-        services: [
-            { 
-              service: "ap",
-              isAlive: true,
-              description: "校務系統"
-            },{
-              service: "bus",
-              isAlive: true,
-              description: "校車系統"
-            },{
-              service: "leave",
-              isAlive: true,
-              description: "缺曠系統"
-            },{
-              service: "library",
-              isAlive: true,
-              description: "圖書館系統"
-            }
-        ]
+        login_systen: "from ap"
     
      
    
