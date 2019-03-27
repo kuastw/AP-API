@@ -295,6 +295,18 @@ paths:
       security:
         - JSON-Web-Token: []
       parameters: 
+      - in: query
+        name: "year"
+        description: "year of semeter"
+        schema:
+            type: integer
+            format: int64
+      - in: query
+        name: "semester"
+        description: "number of semester"
+        schema:
+            type: integer
+            format: int64 
       responses:
         200:
           description: return midterm alerts by year and semester
