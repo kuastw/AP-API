@@ -227,7 +227,7 @@ paths:
                   nameEng:
                     type: string
                     description: student english name
-              example: {"educationSystem": "日間部四技", "department": "資訊工程系", "className": "四資工四甲", "id": "1104112345", "nameCht": "葉大雄", "nameEng": ""}
+              example: {"educationSystem": "日間部四技", "department": "資訊工程系", "className": "四資工四甲", "id": "1104112345", "nameCht": "葉大雄", "nameEng": "","pictureUrl": "http://webap.nkust.edu.tw/nkust/stdpics/XXXXX.jpg"}
         401:
           description: Token expired or Unauthorized Access
         404:
@@ -238,35 +238,6 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
-  /user/picture:
-    get:
-      tags:
-      - User
-      summary: get user's picture
-      security: 
-        - JSON-Web-Token: []
-      responses:
-        200:
-          description: return picture url
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  url:
-                    type: string
-                    description: picUrl
-              example: {"url":"http://webap.nkust.edu.tw/nkust/"}
-        401:
-          description: Token expired or Unauthorized Access
-        404:
-          description: Page not found
-        500:
-          description: Internal Server Error
-        503:
-          description: Upstream server is timeout
-        504:
-          description: Upstream server is not alive        
   /user/semesters:
     get:
       tags:
