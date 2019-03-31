@@ -934,7 +934,7 @@ paths:
                     description: timecode use fill user need leave submit sections
                     items:
                       type: string
-              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
+              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":["多拉A夢","柴犬","if 大學生 then 只有1個"],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
         400: 
           description: Bad Request
         401:
