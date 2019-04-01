@@ -949,6 +949,39 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
+  /library/info:
+    get:
+      tags:
+      - Library
+      summary: get user's absentees and leaves
+      description: "library system client info "
+      security:
+        - JSON-Web-Token: []
+      responses:
+        200:
+          description: return score by year and semester
+          content:
+            application/json:
+              example: {"department":"狗系",
+                "libraryId":"搞不好他id不是學號 type:str",
+                "studentName":"吿娃娃",
+                "record":{
+                  "個人外借紀錄 待更":"",
+                  "預借 外借紀錄 待更":""
+                }
+              }
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
 components:
   schemas:
     ServerInfo:
