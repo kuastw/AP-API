@@ -893,6 +893,34 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
+  /leaves/submit:
+    post:
+      tags:
+      - Leave
+      summary: post leave form 
+      requestBody:
+        content:
+          application/json:    
+            schema:            
+              $ref: '#/components/schemas/leaveSubmit'
+      description: "If query parameters are empty then return the latest absentees and leaves."
+      security:
+        - JSON-Web-Token: []
+      responses:
+        200:
+          description: done
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive
   /leaves/submit/info:
     get:
       tags:
@@ -934,7 +962,7 @@ paths:
                     description: timecode use fill user need leave submit sections
                     items:
                       type: string
-              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":["多拉A夢","柴犬","if 大學生 then 只有1個"],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
+              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":{"多拉A夢":"10023","柴犬":"100220"},"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
         400: 
           description: Bad Request
         401:
@@ -1107,6 +1135,31 @@ components:
         expireTime: "2019-03-16T20:16:04+08:00"
         token: "I6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtIjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJ"
         login_systen: "from ap"
+    leaveSubmit:      
+      type: object
+      properties:
+      
+        leaveDays:
+          type: array
+          items: 
+              type: object
+              properties:
+                days:
+                  type: string
+                  description: daysList
+        teacherId:
+          type: string
+        leaveType:
+          type: string
+        reasonText:
+          type: string
+          
+      example:   
+        days: {"2019/03/03":[1,3,5],"2019/03/05":[2,3],"2019/03/06":[4,5]}
+        leaveType: "21"
+        teacherId: "10041"
+        reasonText: "我不當人類拉 JOJO!!!!!"
+        
     
      
    
