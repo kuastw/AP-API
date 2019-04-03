@@ -962,7 +962,7 @@ paths:
                     description: timecode use fill user need leave submit sections
                     items:
                       type: string
-              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":{"多拉A夢":"10023","柴犬":"100220"},"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
+              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":[{"teacherName":"多拉A夢","teacherId":"10023"},{"teacherName":"柴犬","teacherId":"100220"}],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
         400: 
           description: Bad Request
         401:
@@ -1155,7 +1155,7 @@ components:
           type: string
           
       example:   
-        days: {"2019/03/03":[1,3,5],"2019/03/05":[2,3],"2019/03/06":[4,5]}
+        days: {"2019/03/03":["A","3","5"],"2019/03/05":["2","3"],"2019/03/06":["4","5"]}
         leaveType: "21"
         teacherId: "10041"
         reasonText: "我不當人類拉 JOJO!!!!!"
