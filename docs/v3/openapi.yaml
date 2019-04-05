@@ -853,7 +853,94 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
-          
+  /user/null-class/info:
+    get:
+      tags:
+      - User
+      summary: get campus room List 
+      description: ""
+      security:
+        - JSON-Web-Token: []
+      parameters: 
+      - in: query
+        name: "campus"
+        description: "1=建工  /2=燕巢/3=第一/4=楠梓/5=旗津"
+        schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: return roomName & roomId 
+          content:
+            application/json:
+              schema:
+                type: object
+              example: [{"roomName":"(東棟)東001","roomId":"A001"},{"roomName":"(司令台)司207","roomId":"J207"}]
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive 
+  /user/null-class:
+    get:
+      tags:
+      - User
+      summary: get room's info
+      description: ""
+      security:
+        - JSON-Web-Token: []
+      parameters: 
+      - in: query
+        name: "campus"
+        description: "1=建工  /2=燕巢 /3=第一 /4=楠梓 /5=旗津 "
+        schema:
+            type: integer
+            format: int64
+      - in: query
+        name: "roomId"
+        description: "like A001..."
+        schema:
+            type: integer
+            format: int64
+      - in: query
+        name: "year"
+        description: "year of semeter"
+        schema:
+            type: integer
+            format: int64
+      - in: query
+        name: "semester"
+        description: "number of semester"
+        schema:
+            type: integer
+            format: int64 
+      responses:
+        200:
+          description: return roomName & roomId 
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"instructors":["蕭淳元"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"instructors":["楊孟翰"]}],"timecode":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+        400: 
+          description: Bad Request
+        401:
+          description: Token expired or Unauthorized Access
+        404:
+          description: Page not found
+        500:
+          description: Internal Server Error
+        503:
+          description: Upstream server is timeout
+        504:
+          description: Upstream server is not alive 
   /leaves:
     get:
       tags:
@@ -1147,6 +1234,12 @@ components:
                 days:
                   type: string
                   description: daysList
+                day:
+                  type: string
+                class:
+                  type: array
+                  items:
+                    type: string
         teacherId:
           type: string
         leaveType:
@@ -1155,7 +1248,7 @@ components:
           type: string
           
       example:   
-        days: {"2019/03/03":["A","3","5"],"2019/03/05":["2","3"],"2019/03/06":["4","5"]}
+        days: [{"day":"2019/03/03","class":["A","3","5"]},{"day":"2019/03/05","class":["2","3"]}]
         leaveType: "21"
         teacherId: "10041"
         reasonText: "我不當人類拉 JOJO!!!!!"
