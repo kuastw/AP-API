@@ -1081,8 +1081,9 @@ paths:
                 "libraryId":"搞不好他id不是學號 type:str",
                 "studentName":"吿娃娃",
                 "record":{
-                  "個人外借紀錄 待更":"",
-                  "預借 外借紀錄 待更":""
+                  "borrowing":1,
+                  "reserve-rental":2,
+                  "userFine":300
                 }
               }
         400: 
