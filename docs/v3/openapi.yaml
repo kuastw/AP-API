@@ -227,7 +227,7 @@ paths:
                   nameEng:
                     type: string
                     description: student english name
-              example: {"educationSystem": "日間部四技", "department": "資訊工程系", "className": "四資工四甲", "id": "1104112345", "nameCht": "葉大雄", "nameEng": "","pictureUrl": "http://webap.nkust.edu.tw/nkust/stdpics/XXXXX.jpg"}
+              example: {"educationSystem": "日間部四技", "department": "資訊工程系", "className": "四資工四甲", "id": "1104112345", "name": "葉大雄","pictureUrl": "http://webap.nkust.edu.tw/nkust/stdpics/XXXXX.jpg"}
         401:
           description: Token expired or Unauthorized Access
         404:
@@ -273,7 +273,7 @@ paths:
                       text:
                           type: string
                           description: text
-              example: {"semester": [{"value": "107,1","text": "107學年度第1學期"},{"value": "107,2","text": "107學年度第2學期"}],"default": {"value": "107,2","text": "107學年度第2學期"}}
+              example: {"semesters": [{"year": "107","value":"1","text": "107學年度第1學期"},{"year": "107","value":"2","text": "107學年度第2學期"}],"default": {"year": "107","value":"2","text": "107學年度第2學期"}}
         400: 
           description: Bad Request
         401:
@@ -341,7 +341,7 @@ paths:
                         remark:
                           type: string
                           description: text
-              example: {"courseList":[{"entry":"01","className":"四資工甲","title":"專業倫理","group":"01","instructors":"陳洳瑾","reason":"不認真","remark":"還是不認真"}]}
+              example: {"courses":[{"entry":"01","className":"四資工甲","title":"專業倫理","group":"01","instructors":"陳洳瑾","reason":"不認真","remark":"還是不認真"}]}
         400: 
           description: Bad Request
         401:
@@ -468,7 +468,7 @@ paths:
             application/json:
               schema:
                 type: object
-              example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"code":"0434","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)2-4","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","weekday":"R","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","weekday":"R","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timecode":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+              example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"code":"0434","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)2-4","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
         400: 
           description: Bad Request
         401:
@@ -481,7 +481,7 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
-  /user/reward-and-punishments:
+  /user/reward-and-penalty:
     get:
       tags:
       - User
@@ -595,7 +595,7 @@ paths:
                         score:
                           type: integer
                           description: class of score
-              example: {"data": {"studentName":"葉大雄","className":"四資工四甲","id":"1103412345"}, "englishPass": "通過", "englishClassPss": "及格通過", "internships": [{"year":"107","semester":"4","code":"0049","name":"校外實務實習(一)","score":85}]}
+              example: {"data": {"name":"葉大雄","className":"四資工四甲","id":"1103412345"}, "englishPass": "通過", "englishClassPass": "及格通過", "internships": [{"year":"107","semester":"4","code":"0049","name":"校外實務實習(一)","score":85}]}
         401:
           description: Token expired or Unauthorized Access
         404:
@@ -674,7 +674,7 @@ paths:
                       date:
                           type: string
                           description: ISO 8601 time
-              example: {"date":"2019-03-17T16:51:57Z","timetable":[{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42705","reserveCount":2,"limitCount":999,"isReserve":true,"specialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false},{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42711","reserveCount":11,"limitCount":999,"isReserve":false,"SpecialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false}]}
+              example: {"date":"2019-03-17T16:51:57Z","data":[{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42705","reserveCount":2,"limitCount":999,"isReserve":true,"specialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false},{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42711","reserveCount":11,"limitCount":999,"isReserve":false,"SpecialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false}]}
         400: 
           description: Bad Request
         401:
@@ -734,7 +734,7 @@ paths:
                         travelState:
                           type: string
                           description: bus reserve travel state
-              example: {"reservation":[{"time":"2019-03-17T16:51:57Z","endTime":"2019-03-14T08:20Z","cancelKey":"2004434","start":"建工","state":"0","travelState":"0"},{"time":"2019-03-18T00:20Z","endTime":"2019-03-17T09:20Z","cancelKey":"2006005","start":"建工","state":"0","travelState":"0"},{"time":"2019-03-18T08:40Z","endTime":"2019-03-18T03:40Z","cancelKey":"2006006","start":"燕巢","state":"0","travelState":"0"}]}
+              example: {"data":[{"dateTime":"2019-03-17T16:51:57Z","endTime":"2019-03-14T08:20Z","cancelKey":"2004434","start":"建工","state":"0","travelState":"0"},{"dateTime":"2019-03-18T00:20Z","endTime":"2019-03-17T09:20Z","cancelKey":"2006005","start":"建工","state":"0","travelState":"0"},{"dateTime":"2019-03-18T08:40Z","endTime":"2019-03-18T03:40Z","cancelKey":"2006006","start":"燕巢","state":"0","travelState":"0"}]}
         400: 
           description: Bad Request
         401:
@@ -853,7 +853,7 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
-  /user/null-class/info:
+  /user/room/list:
     get:
       tags:
       - User
@@ -888,7 +888,7 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive 
-  /user/null-class:
+  /user/empty-room/info:
     get:
       tags:
       - User
@@ -928,7 +928,7 @@ paths:
             application/json:
               schema:
                 type: object
-                example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"instructors":["蕭淳元"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"instructors":["楊孟翰"]}],"timecode":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+                example: {"courses":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"instructors":["蕭淳元"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
         400: 
           description: Bad Request
         401:
@@ -967,7 +967,7 @@ paths:
           description: return score by year and semester
           content:
             application/json:
-              example: {"leaves":[{"leaveSheetId":"","date":"107/11/14","instructors_comment":"","leave_sections":[{"section":"5","reason":"曠"},{"section":"6","reason":"曠"}]}],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
+              example: {"data":[{"leaveSheetId":"","date":"107/11/14","instructorsComment":"","sections":[{"section":"5","reason":"曠"},{"section":"6","reason":"曠"}]}],"timeCodes":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
         400: 
           description: Bad Request
         401:
@@ -1044,12 +1044,12 @@ paths:
                       title:
                         type: string
                         description: text
-                  timecode:
+                  timeCodes:
                     type: array
                     description: timecode use fill user need leave submit sections
                     items:
                       type: string
-              example: {"tutors":{"name":"朱紹儀"},"leavesType":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":[{"teacherName":"多拉A夢","teacherId":"10023"},{"teacherName":"柴犬","teacherId":"100220"}],"timecode":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
+              example: {"tutors":{"name":"柯博昌"},"type":[{"id":"21","title":"事假"},{"id":"22","title":"病假"},{"id":"23","title":"公假"},{"id":"24","title":"喪假"},{"id":"42","title":"產假"}],"teacherList":[{"teacherName":"柯博昌","teacherId":"10023"},{"teacherName":"柯博昌","teacherId":"100220"}],"timeCodes":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
         400: 
           description: Bad Request
         401:
@@ -1077,9 +1077,9 @@ paths:
           description: return score by year and semester
           content:
             application/json:
-              example: {"department":"狗系",
-                "libraryId":"搞不好他id不是學號 type:str",
-                "studentName":"吿娃娃",
+              example: {"department":"智慧商務系QQ",
+                "libraryId":"1106133333",
+                "studentName":"柯博昌",
                 "record":{
                   "borrowing":1,
                   "reserve-rental":2,
@@ -1222,7 +1222,6 @@ components:
       example:   
         expireTime: "2019-03-16T20:16:04+08:00"
         token: "I6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtIjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJ"
-        login_systen: "from ap"
     leaveSubmit:      
       type: object
       properties:
