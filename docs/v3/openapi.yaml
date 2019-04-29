@@ -221,12 +221,12 @@ paths:
                   id:
                     type: string
                     description: student id
-                  nameCht:
+                  name:
                     type: string
-                    description: student chinese name
-                  nameEng:
+                    description: student name
+                  pictureUrl:
                     type: string
-                    description: student english name
+                    description: student picture url
               example: {"educationSystem": "日間部四技", "department": "資訊工程系", "className": "四資工四甲", "id": "1104112345", "name": "葉大雄","pictureUrl": "http://webap.nkust.edu.tw/nkust/stdpics/XXXXX.jpg"}
         401:
           description: Token expired or Unauthorized Access
@@ -425,7 +425,7 @@ paths:
                           type: string
                           description: rank in class
                       classPercentage:
-                          type: string
+                          type: integer
                           description: percentage in class
               example: {"scores":[{"title":"專業倫理","units":"1.0","hours":"1.0","required":"【必修】","at":"【學期】","middleScore":"*","finalScore":"96.00","remark":""},{"title":"核心通識(三)-現今科技議題","units":"2.0","hours":"2.0","required":"【必修】","at":"【學期】","middleScore":"*","finalScore":"69.00","remark":""}],"detail":{"conduct":82,"average":39,"classRank":"57/57","classPercentage":100}}
         400: 
@@ -468,6 +468,90 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  courseList:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: class code 
+                        title:
+                          type: string
+                          description: class title 
+                        className:
+                          type: string
+                          description: class name
+                        group:
+                          type: string
+                          description: group number 
+                        units:
+                          type: string
+                          description: text
+                        hours:
+                          type: string
+                          description: midterm grade
+                        at:
+                          type: string
+                          description: final grade 
+                        times:
+                          type: string
+                          description: text
+                        location:
+                          type: object
+                          properties:
+                            building:
+                              type: string 
+                              description: e.g. 滕雄館
+                            room:
+                              type: string
+                              description: class room 
+                        instructors:
+                              type: array
+                              items:
+                                  type: string
+                                  description: teacher name 
+                  coursetables:
+                    type: object
+                    properties:
+                      Thursday:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              description: class title
+                            date:
+                              type: object
+                              properties:
+                                startTime:
+                                  type: string
+                                endTime:
+                                  type: string
+                                section:
+                                  type: string
+                                  description: 節次
+                            location:
+                              type: object
+                              properties:
+                                building:
+                                  type: string 
+                                  description: e.g. 滕雄館
+                                room:
+                                  type: string
+                                  description: class room 
+                            instructors:
+                                  type: array
+                                  items:
+                                      type: string
+                                      description: teacher name 
+                      timeCodes:
+                        type: array
+                        items:
+                          type: string
+                          description: show in forntend 
               example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"code":"0434","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)2-4","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
         400: 
           description: Bad Request
@@ -510,7 +594,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  scores:
+                  data:
                     type: array
                     items:
                       type: object
@@ -811,7 +895,6 @@ paths:
       description: ""
       security:
         - JSON-Web-Token: []
-      parameters: 
       responses:
         200:
           description: return bus violation records
@@ -875,7 +958,20 @@ paths:
             application/json:
               schema:
                 type: object
-              example: [{"roomName":"(東棟)東001","roomId":"A001"},{"roomName":"(司令台)司207","roomId":"J207"}]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        roomName:
+                          type: string
+                          description: room name 
+                        roomId:
+                          type: string
+                          description: shorthand room name .
+                
+              example: {"data":[{"roomName":"(東棟)東001","roomId":"A001"},{"roomName":"(司令台)司207","roomId":"J207"}]}
         400: 
           description: Bad Request
         401:
@@ -928,6 +1024,77 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  courses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: class code 
+                        title:
+                          type: string
+                          description: class title 
+                        className:
+                          type: string
+                          description: class name
+                        group:
+                          type: string
+                          description: group number 
+                        units:
+                          type: string
+                          description: text
+                        hours:
+                          type: string
+                          description: midterm grade
+                        required:
+                          type: string
+                          description: 必選修
+                        at:
+                          type: string
+                          description: final grade 
+                        times:
+                          type: string
+                          description: text
+                        instructors:
+                              type: array
+                              items:
+                                  type: string
+                                  description: teacher name 
+                  coursetables:
+                    type: object
+                    properties:
+                      Thursday:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              description: class title
+                            date:
+                              type: object
+                              properties:
+                                startTime:
+                                  type: string
+                                endTime:
+                                  type: string
+                                weekday:
+                                  type: string
+                                section:
+                                  type: string
+                                  description: 節次
+                            instructors:
+                                  type: array
+                                  items:
+                                      type: string
+                                      description: teacher name 
+                      timeCodes:
+                        type: array
+                        items:
+                          type: string
+                          description: show in forntend 
                 example: {"courses":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"instructors":["蕭淳元"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
         400: 
           description: Bad Request
@@ -1016,7 +1183,6 @@ paths:
       description: ""
       security:
         - JSON-Web-Token: []
-      parameters:
       responses:
         200:
           description: return score by year and semester
@@ -1258,9 +1424,6 @@ components:
    
            
   securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
     JSON-Web-Token:
       type: apiKey
       in: header
