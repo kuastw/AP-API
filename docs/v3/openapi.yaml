@@ -1134,6 +1134,35 @@ paths:
           description: return score by year and semester
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        leaveSheetId:
+                          type: string
+                        date:
+                          type: string
+                          description: just date without time
+                        instructorsComment:
+                          type: string
+                        sections:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              section:
+                                type: string
+                              reason:
+                                type: string
+                  timeCodes:
+                    type: array
+                    description: timecode use fill user need leave submit sections
+                    items:
+                      type: string
               example: {"data":[{"leaveSheetId":"","date":"107/11/14","instructorsComment":"","sections":[{"section":"5","reason":"曠"},{"section":"6","reason":"曠"}]}],"timeCodes":["A","1","2","3","4","B","5","6","7","8","C","11","12","13","14"]}
         400: 
           description: Bad Request
@@ -1192,15 +1221,12 @@ paths:
                 type: object
                 properties:
                   tutors:
-                    type: array
-                    description: user's class teacher
-                    items:
-                      type: object
-                      properties:
+                    type: object
+                    properties:
                         name:
                           type: string
                           description: teacher's name
-                  leavesType:
+                  type:
                     type: object
                     description: leaves type
                     properties:
@@ -1243,7 +1269,31 @@ paths:
           description: return score by year and semester
           content:
             application/json:
-              example: {"department":"智慧商務系QQ",
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      department:
+                        type: string
+                      libraryId:
+                        type: string
+                      studentName:
+                        type: string
+                      record:
+                        type: object
+                        properties:
+                          borrowing:
+                            type: integer
+                            description: 未過期 借閱中
+                          reserve-rental:
+                            type: integer
+                            description: 預約/調借紀錄 
+                          userFine:
+                            type: integer
+                            description:  罰款
+              example: {"data":{"department":"智慧商務系QQ",
                 "libraryId":"1106133333",
                 "studentName":"柯博昌",
                 "record":{
@@ -1251,7 +1301,7 @@ paths:
                   "reserve-rental":2,
                   "userFine":300
                 }
-              }
+              }}
         400: 
           description: Bad Request
         401:
@@ -1391,15 +1441,11 @@ components:
     leaveSubmit:      
       type: object
       properties:
-      
-        leaveDays:
+        days:
           type: array
           items: 
               type: object
               properties:
-                days:
-                  type: string
-                  description: daysList
                 day:
                   type: string
                 class:
