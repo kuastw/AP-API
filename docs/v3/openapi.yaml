@@ -144,35 +144,38 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items: 
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                      description: id
-                    nextid:
-                      type: integer
-                      description: next news id
-                    lastId:
-                      type: integer
-                    title:
-                      type: string
-                      description: title
-                    publishedTime:
-                      type: string
-                      description: publish time
-                    url:
-                      type: string
-                      description: news url
-                    imgUrl:
-                      type: string
-                      description: image url
-                    description:
-                      type: string
-                      description: news description
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: id
+                        nextid:
+                          type: integer
+                          description: next news id
+                        lastId:
+                          type: integer
+                        title:
+                          type: string
+                          description: title
+                        publishedTime:
+                          type: string
+                          description: publish time
+                        url:
+                          type: string
+                          description: news url
+                        imgUrl:
+                          type: string
+                          description: image url
+                        description:
+                          type: string
+                          description: news description
               example: 
-                [{"title": "高科校務通IOS版 回歸", "id": 1,"nextId":2,"lastId":2, "imgUrl": "https://i.imgur.com/faSwvRv.jpg", "url": "https://nkustap.page.link/bCK1", "description": "重新推出 IOS 版本 高科校務通 此版本還在測試中 歡迎同學私訊粉專意見回饋\t","publishedTime": "2019-03-16T20:16:04+08:00"}, {"title": "宿舍直達高鐵站專車", "id": 2,"nextId":-1,"lastId":2, "imgUrl": "https://i.imgur.com/wwxD4Xa.png", "url": "", "description": "從燕巢宿舍直接發車，不用再走到公車站排隊 人數達25人即發車，一人只要30元喔","publishedTime": "2019-03-16T20:16:04+08:00"}]
+                {"data":[{"title": "高科校務通IOS版 回歸", "id": 1,"nextId":2,"lastId":2, "imgUrl": "https://i.imgur.com/faSwvRv.jpg", "url": "https://nkustap.page.link/bCK1", "description": "重新推出 IOS 版本 高科校務通 此版本還在測試中 歡迎同學私訊粉專意見回饋\t","publishedTime": "2019-03-16T20:16:04+08:00"}, {"title": "宿舍直達高鐵站專車", "id": 2,"nextId":-1,"lastId":2, "imgUrl": "https://i.imgur.com/wwxD4Xa.png", "url": "", "description": "從燕巢宿舍直接發車，不用再走到公車站排隊 人數達25人即發車，一人只要30元喔","publishedTime": "2019-03-16T20:16:04+08:00"}]}
         404:
           description: Page not found
         500:
@@ -187,8 +190,35 @@ paths:
           description: return school news
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      notification:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            link:
+                              type: string
+                            info:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                title:
+                                  type: string
+                                department:
+                                  type: string
+                                date:
+                                  type: string
+                                  
               example: 
-                {"page":1,"notification":[{"link":"http://kuasnews.kuas.edu.tw/files/13-1018-70766-1.php","info":{"id":"1","title":"2019年高科大高雄亮點日語導覽競賽","department":"觀光系","date":"2019-03-13"}},{"link":"http://gec.kuas.edu.tw/files/13-1012-70765-1.php","info":{"id":"2","title":"快來拿獎金!!!第22屆優質通識課程學生學習檔案e化徵選活動~","department":"通識中心","date":"2019-03-13"}}]}
+                {"data":{"page":1,"notification":[{"link":"http://kuasnews.kuas.edu.tw/files/13-1018-70766-1.php","info":{"id":"1","title":"2019年高科大高雄亮點日語導覽競賽","department":"觀光系","date":"2019-03-13"}},{"link":"http://gec.kuas.edu.tw/files/13-1012-70765-1.php","info":{"id":"2","title":"快來拿獎金!!!第22屆優質通識課程學生學習檔案e化徵選活動~","department":"通識中心","date":"2019-03-13"}}]}}
         404:
           description: Page not found
         500:
