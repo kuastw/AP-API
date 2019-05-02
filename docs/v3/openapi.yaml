@@ -288,6 +288,9 @@ paths:
                     items:
                       type: object
                       properties:
+                        year:
+                          type: string
+                          description: semester year
                         value:
                           type: string
                           description: semester
@@ -297,9 +300,12 @@ paths:
                   default:
                     type: object
                     properties:
+                      year:
+                          type: string
+                          description: semester year
                       value:
                           type: string
-                          description: semester
+                          description: semester 
                       text:
                           type: string
                           description: text
@@ -345,7 +351,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  courseList:
+                  courses:
                     type: array
                     items:
                       type: object
@@ -470,7 +476,7 @@ paths:
           description: Upstream server is timeout
         504:
           description: Upstream server is not alive
-  /user/coursetables:
+  /user/coursetable:
     get:
       tags:
       - User
@@ -499,7 +505,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  courseList:
+                  courses:
                     type: array
                     items:
                       type: object
@@ -542,7 +548,7 @@ paths:
                               items:
                                   type: string
                                   description: teacher name 
-                  coursetables:
+                  coursetable:
                     type: object
                     properties:
                       Thursday:
@@ -582,7 +588,7 @@ paths:
                         items:
                           type: string
                           description: show in forntend 
-              example: {"courseList":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"code":"0434","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)2-4","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+              example: {"courses":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"code":"0434","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)2-4","location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"coursetable":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","section":"第2節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","section":"第3節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","section":"第4節"},"location":{"building":"","room":"育302"},"instructors":["蕭淳元"]},{"title":"圖形理論","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]},{"title":"圖形理論","date":{"startTime":"15:30","endTime":"16:20","weekday":"R","section":"第7節"},"location":{"building":"","room":"育305"},"instructors":["鐘文鈺"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","section":"第5節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","section":"第6節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","section":"第7節"},"location":{"building":"","room":"育302"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
         400: 
           description: Bad Request
         401:
@@ -779,7 +785,7 @@ paths:
                         specialTrain:
                           type: string
                           description: special train
-                        isReturnHomeBus:
+                        homeCharteredBus:
                           type: boolean
                           description: is return home bus
                   date:
@@ -788,7 +794,7 @@ paths:
                       date:
                           type: string
                           description: ISO 8601 time
-              example: {"date":"2019-03-17T16:51:57Z","data":[{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42705","reserveCount":2,"limitCount":999,"isReserve":true,"specialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false},{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42711","reserveCount":11,"limitCount":999,"isReserve":false,"SpecialTrain":"0","discription":"","cancelKey":0,"isReturnHomeBus":false}]}
+              example: {"date":"2019-03-17T16:51:57Z","data":[{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42705","reserveCount":2,"limitCount":999,"isReserve":true,"specialTrain":"0","discription":"","cancelKey":0,"homeCharteredBus":false},{"endEnrollDateTime":"2019-03-17T16:51:57Z","departureTime":"2019-03-17T16:51:57Z","startStation":"建工","busId":"42711","reserveCount":11,"limitCount":999,"isReserve":false,"SpecialTrain":"0","discription":"","cancelKey":0,"homeCharteredBus":false}]}
         400: 
           description: Bad Request
         401:
@@ -944,7 +950,7 @@ paths:
                         startStation:
                           type: string
                           description: start station
-                        isReturnHomeBus:
+                        homeCharteredBus:
                           type: boolean
                           description: is return home bus
                         amountend:
@@ -953,7 +959,7 @@ paths:
                         isPayment:
                           type: string
                           description: text
-              example: {"reservation":[{"time":"2019-03-17T16:51:57Z","startStation":"建工","isReturnHomeBus":false,"amountend":30,"isPayment":""}]}
+              example: {"reservation":[{"time":"2019-03-17T16:51:57Z","startStation":"建工","homeCharteredBus":false,"amountend":30,"isPayment":""}]}
         400: 
           description: Bad Request
         401:
@@ -1092,7 +1098,7 @@ paths:
                               items:
                                   type: string
                                   description: teacher name 
-                  coursetables:
+                  coursetable:
                     type: object
                     properties:
                       Thursday:
@@ -1125,7 +1131,7 @@ paths:
                         items:
                           type: string
                           description: show in forntend 
-                example: {"courses":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","instructors":["楊孟翰"]}],"coursetables":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"instructors":["蕭淳元"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
+                example: {"courses":[{"code":"0430","title":"區塊鏈技術與應用","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(四)5-7","instructors":["鐘文鈺"]},{"code":"0431","title":"高等資料庫","className":"碩資工一甲","group":"01","units":"3.0","hours":"3.0","required":"【選修】","at":"【學期】","times":"(二)5-7","instructors":["楊孟翰"]}],"coursetable":{"Thursday":[{"title":"區塊鏈技術與應用","date":{"startTime":"09:10","endTime":"10:00","weekday":"R","section":"第2節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"10:10","endTime":"11:00","weekday":"R","section":"第3節"},"instructors":["蕭淳元"]},{"title":"區塊鏈技術與應用","date":{"startTime":"11:10","endTime":"12:00","weekday":"R","section":"第4節"},"instructors":["蕭淳元"]}],"Tuesday":[{"title":"高等資料庫","date":{"startTime":"13:30","endTime":"14:20","weekday":"T","section":"第5節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"14:30","endTime":"15:20","weekday":"T","section":"第6節"},"instructors":["楊孟翰"]},{"title":"高等資料庫","date":{"startTime":"15:30","endTime":"16:20","weekday":"T","section":"第7節"},"instructors":["楊孟翰"]}],"timeCodes":["第M節","第1節","第2節","第3節","第4節","第A節","第5節","第6節","第7節","第8節","第9節","第10節","第11節","第12節","第13節"]}}
         400: 
           description: Bad Request
         401:
@@ -1325,7 +1331,7 @@ paths:
                             description:  罰款
               example: {"data":{"department":"智慧商務系QQ",
                 "libraryId":"1106133333",
-                "studentName":"柯博昌",
+                "name":"柯博昌",
                 "record":{
                   "borrowing":1,
                   "reserve-rental":2,
