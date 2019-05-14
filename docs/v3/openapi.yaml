@@ -283,7 +283,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  semester:
+                  data:
                     type: array
                     items:
                       type: object
@@ -309,7 +309,7 @@ paths:
                       text:
                           type: string
                           description: text
-              example: {"semesters": [{"year": "107","value":"1","text": "107學年度第1學期"},{"year": "107","value":"2","text": "107學年度第2學期"}],"default": {"year": "107","value":"2","text": "107學年度第2學期"}}
+              example: {"data": [{"year": "107","value":"1","text": "107學年度第1學期"},{"year": "107","value":"2","text": "107學年度第2學期"}],"default": {"year": "107","value":"2","text": "107學年度第2學期"}}
         400: 
           description: Bad Request
         401:
@@ -1355,15 +1355,15 @@ components:
     ServerInfo:
       type: object
       properties:
-        serverIime:
+        date:
           type: string
           description:  ISO 8601
-        services:
+        data:
           $ref: '#/components/schemas/Service'
       description: all services status
       example:   
         date: "2019-03-16T20:16:04+08:00"
-        services: [
+        data: [
             { 
               service: "ap",
               isAlive: true,
